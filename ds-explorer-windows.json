@@ -1,0 +1,6 @@
+{
+  "version": "1.8.10",
+  "url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/ds-explorer-windows-v1.8.10/DS-Explorer-3D-Windows-V1.8.10-update.zip",
+  "sha256": "691a0243119a67bb3a8faba434f91444ad1e9e970bc39713513f14af4faaa54f",
+  "notes": "Neues Logo „Design von Maik“. Windows-Build, Start, Installation und Wiederherstellung geprüft; Laptop-Test noch offen. V1.8.9 hat einen bestätigten Download-Dateisperrfehler: Für den ersten Wechsel bitte einmalig DS-Explorer-3D-Windows-V1.8.10-Installieren.exe aus dem GitHub-Release starten. Kein eigener Build nötig."
+}

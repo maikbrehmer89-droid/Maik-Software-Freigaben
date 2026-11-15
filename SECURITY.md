@@ -19,7 +19,7 @@ Ein Installationspaket darf erst als produktives Update veröffentlicht werden, 
 
 ## Aktueller Veröffentlichungsstatus
 
-**Keine produktiven Updates freigegeben.** Die öffentlichen Downloads bleiben leer, bis gültige Signiermittel und reproduzierbare Installationsnachweise vorhanden sind. Ein fehlender Download ist ein beabsichtigter sicherer Fehlerzustand.
+**DS-Explorer Windows 1.8.10 ist seit 15.11.2026 für den vom Eigentümer beauftragten Installationstest veröffentlicht.** Build, Programmstart, Paketstruktur, Installation, Wiederherstellung und anonyme Downloads wurden automatisiert geprüft. Der Laptop- und NAS-Praxistest steht aus; Authenticode- und Offline-Manifest-Signaturen sind nicht vorhanden. Diese Veröffentlichung wird deshalb ausdrücklich nicht als Erfüllung aller oben genannten Produktiv-Freigaberegeln bezeichnet. Die Release-Hinweise dokumentieren die Einschränkungen und den einmalig notwendigen Installer für V1.8.9. Ein fehlender Download ist ein beabsichtigter sicherer Fehlerzustand.
 
 ## Meldung von Schwachstellen
 

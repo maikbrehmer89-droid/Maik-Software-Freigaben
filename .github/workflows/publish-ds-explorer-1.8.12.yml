@@ -1,0 +1,103 @@
+name: Publish verified DS-Explorer 1.8.12
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-ds-explorer-1.8.12.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: publish-ds-explorer-1.8.12
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: maikbrehmer89-droid/Maik-Software-Freigaben
+      SOURCE_URL: "https://sdmntprpolandcentral.oaiusercontent.com/files/00000000-fa34-820a-b5b5-10a417c7c51a/raw?se=2026-11-16T18%3A35%3A48Z&sp=r&sv=2026-06-06&sr=b&scid=b919f633-dff7-4269-9881-1b733f86af15&skoid=e5f84a89-964a-4fd3-92c2-c2cb3a12ea16&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-16T16%3A20%3A33Z&ske=2026-11-17T16%3A20%3A33Z&sks=b&skv=2026-06-06&sig=naULwm4WH1y25zKrPYN%2BEy9GKV67ynUWzTCVq6GLQKg%3D"
+      EXPECTED_ARTIFACT_SHA: 23abf35c3b1849405659c813b4999fc05eb8197a44e313c9631c04e4f88d1f95
+    steps:
+      - name: Download exact artifact from verified Windows run 43928862348
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 2 "$SOURCE_URL" -o verified.zip
+          echo "$EXPECTED_ARTIFACT_SHA  verified.zip" | sha256sum --check
+          python3 - <<'PY'
+          import zipfile,json,hashlib,pathlib
+          expected={'DS-Explorer-3D-Windows-V1.8.12-update.zip','DS-Explorer-3D-Windows-V1.8.12-Installieren.exe','SHA256.txt','verification.json','energy-verification.json','energy-verification.png'}
+          with zipfile.ZipFile('verified.zip') as z:
+              assert set(z.namelist())==expected, z.namelist()
+              assert z.testzip() is None
+              z.extractall('release')
+          p=pathlib.Path('release')
+          report=json.loads((p/'verification.json').read_text(encoding='utf-8-sig'))
+          assert report['version']=='1.8.12'
+          for key in ['windows_start','logo_resource','package_structure','update_installation','rollback_invalid_executable','login_preservation','installer_silent_install','installer_backup','energy_core_runtime','download_progress','updater_status_window','settings_preservation','updater_status_transitions']:
+              assert report[key]=='passed',key
+          digest=lambda f:hashlib.sha256(f.read_bytes()).hexdigest()
+          assert digest(p/'DS-Explorer-3D-Windows-V1.8.12-update.zip')==report['sha256']
+          assert digest(p/'DS-Explorer-3D-Windows-V1.8.12-Installieren.exe')==report['installer_sha256']
+          energy=json.loads((p/'energy-verification.json').read_text(encoding='utf-8-sig'))
+          assert energy['original_sha256'].lower()=='1959a35bf643c38ff9027f0e572e1e97cac42220635dda6ada44c0cdaa036d55'
+          for key in ['original_resource','rendered_image','animation_lifecycle','download_stream_progress','truncated_download']:
+              assert energy[key]=='passed'
+          with zipfile.ZipFile(p/'DS-Explorer-3D-Windows-V1.8.12-update.zip') as z:
+              assert z.testzip() is None
+              for n in z.namelist():
+                  assert not n.lower().endswith(('.cs','.csproj','.xaml','.pfx','.pem','.key','.conf','.dat','.ps1'))
+                  assert '..' not in pathlib.PurePosixPath(n.replace('\\','/')).parts
+          PY
+      - name: Publish immutable version and verify public bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag=ds-explorer-windows-v1.8.12
+          if gh release view "$tag" --json tagName >/dev/null 2>&1; then
+            echo 'Version exists; refusing overwrite'; exit 1
+          fi
+          cat > notes.md <<'TEXT'
+          DS-Explorer 3D Windows 1.8.12 – Original-Energiekern
+
+          Unveraenderte Originalgrafik, dezente animierte Leuchtringe und Pulsieren. Downloadfortschritt zeigt echte Prozent oder MB. Der externe Update-Helfer hat eine separate Statusanzeige mit Erfolg und Wiederherstellungsergebnis; keine erfundenen Installationsprozente.
+
+          Regulärer Updateweg: In DS-Explorer „Auf Updates prüfen“ → „Update installieren“.
+          Beim ersten Wechsel verwendet die Altversion noch ihren bisherigen Helfer. Die neue Installationsanzeige steht ab 1.8.12 für nachfolgende Updates bereit. Historischer V1.8.9-Quellcode enthält einen Download-Dateisperrfehler; der neue Code kann eine noch laufende Altversion nicht rückwirkend reparieren.
+
+          Windows x64 getestet: Build, Start, Originalbild-Hash und Rendering, Animation und Pausieren, Download-Stream mit bekannter/unbekannter Größe, abgebrochener Stream, separates Statusfenster, Installation, Rollback, Erhalt von Test-Anmeldedaten und Einstellungen sowie Installer-Sicherung. Prüfberichte und gerendertes Bild sind beigefügt. Unveränderte Artefakte aus dem privaten Windows-Prüflauf 43928862348, Commit bdeb5900acdf823db7961c4b7b1fd7f7997c45e3.
+
+          Offen: tatsächlicher Updatewechsel auf Maiks Laptop, echte Anmeldung und NAS-Übertragungen, Samsung-TV-Prüfung/Konvertierung, WireGuard und VLC. Diese Dienste und der NAS-Fortschrittsbalken sind unverändert. Keine vollständige Geräteprüfung behauptet.
+
+          Voraussetzung: Windows x64 mit .NET 8 Desktop Runtime. Kein Herausgeberzertifikat. Der zusätzliche Installer bleibt ein optionales Artefakt; regulär erfolgt das Update in der Anwendung. Quellcode und Zugangsdaten sind nicht enthalten.
+          TEXT
+          gh release create "$tag" release/* --title 'DS-Explorer 3D Windows 1.8.12' --notes-file notes.md --draft
+          mkdir redownload
+          gh release download "$tag" --dir redownload
+          for file in release/*; do cmp "$file" "redownload/$(basename "$file")"; done
+          gh release edit "$tag" --draft=false --latest
+          curl --fail --location --retry 3 "https://github.com/$GH_REPO/releases/download/$tag/DS-Explorer-3D-Windows-V1.8.12-update.zip" -o public.zip
+          cmp release/DS-Explorer-3D-Windows-V1.8.12-update.zip public.zip
+      - name: Update existing in-app catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GH_REPO/contents/ds-explorer-windows.json" > previous.json
+          python3 - <<'PY'
+          import json,base64,pathlib
+          report=json.loads(pathlib.Path('release/verification.json').read_text(encoding='utf-8-sig'))
+          catalog={'version':'1.8.12','url':'https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/ds-explorer-windows-v1.8.12/DS-Explorer-3D-Windows-V1.8.12-update.zip','sha256':report['sha256'],'notes':'Original-Energiekern mit dezenter Animation, echtem Downloadfortschritt und separater Installationsanzeige. Windows-Tests bestanden; echte Geraetetests am Laptop stehen aus.'}
+          encoded=base64.b64encode(json.dumps(catalog,ensure_ascii=False,indent=2).encode()).decode()
+          previous=json.loads(pathlib.Path('previous.json').read_text())
+          pathlib.Path('catalog-request.json').write_text(json.dumps({'message':'Publish verified DS-Explorer 1.8.12 update catalog','content':encoded,'sha':previous['sha'],'branch':'main'}))
+          pathlib.Path('expected-catalog.json').write_text(json.dumps(catalog))
+          PY
+          gh api --method PUT "repos/$GH_REPO/contents/ds-explorer-windows.json" --input catalog-request.json > catalog-result.json
+          gh api "repos/$GH_REPO/contents/ds-explorer-windows.json" > remote.json
+          python3 - <<'PY'
+          import json,base64,pathlib
+          remote=json.loads(pathlib.Path('remote.json').read_text())
+          assert json.loads(base64.b64decode(remote['content']))==json.loads(pathlib.Path('expected-catalog.json').read_text())
+          print('Verified release 1.8.12 and existing in-app catalog published')
+          PY

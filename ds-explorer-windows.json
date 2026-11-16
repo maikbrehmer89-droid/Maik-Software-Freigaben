@@ -1,6 +1,6 @@
 {
-  "version": "1.8.12",
-  "url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/ds-explorer-windows-v1.8.12/DS-Explorer-3D-Windows-V1.8.12-update.zip",
-  "sha256": "e1109fdd5f1ab055ef54d7b85aada93f9a9067b929a16ef5134de7f19176ea04",
-  "notes": "Original-Energiekern mit dezenter Animation, echtem Downloadfortschritt und separater Installationsanzeige. Windows-Tests bestanden; echte Geraetetests am Laptop stehen aus."
+  "sha256": "7553244cad60cd214fa48c747ad06c044f6743048a1541b86fe248712cdf2bb0",
+  "url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/ds-explorer-windows-v1.8.13/DS-Explorer-3D-Windows-V1.8.13-update.zip",
+  "notes": "Original-Energiekern mit dezenter Animation, echtem Downloadfortschritt und separater Installationsanzeige. Windows-Tests bestanden; reale Geraetetests am Laptop stehen aus. Update wie gewohnt in der Anwendung installieren.",
+  "version": "1.8.13"
 }

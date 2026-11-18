@@ -1,4 +1,22 @@
 {
   "schema": 1,
-  "releases": []
+  "releases": [
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.5",
+      "sha256": "a30504adfd84c3b977fa45357bdc5a80ee674fcd74b71714ce154bc5a40ac734",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-18",
+      "aenderungen": [
+        "DXF-Import von 2D-Ellipsen und unterstützten Splines."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.5/CAD_Designer_2D_V1_3_5_Update.zip"
+    }
+  ]
 }

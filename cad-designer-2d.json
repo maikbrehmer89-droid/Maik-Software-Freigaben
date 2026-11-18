@@ -17,6 +17,23 @@
         "DXF-Import von 2D-Ellipsen und unterstützten Splines."
       ],
       "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.5/CAD_Designer_2D_V1_3_5_Update.zip"
+    },
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.6",
+      "sha256": "1ffb65064809d7b904ff0e4d86a5cd915da00b4969a41918c67af133b678a623",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-18",
+      "aenderungen": [
+        "Lange DXF-Polylinien werden vollständig importiert. Korrektur der abgeschnittenen Außenkontur am Cappuccino-Löffel."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.6/CAD_Designer_2D_V1_3_6_Update.zip"
     }
   ]
 }

@@ -86,6 +86,23 @@
         "Doppellinien-Check markiert deckungsgleiche und möglicherweise überlagerte gerade Segmente. Per Rechtsklick, im Konturcheck oder mit Strg+Umschalt+D erreichbar."
       ],
       "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.9/CAD_Designer_2D_V1_3_9_Update.zip"
+    },
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.10",
+      "sha256": "62172a4eb283a3aff69eebfe1fe2ae9ca23bce938e2a191eb9fd500dffed7d85",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-18",
+      "aenderungen": [
+        "Doppellinien-Check erkennt zusätzlich doppelte Kreise und Bohrungen sowie überlagerte Kreisbögen."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.10/CAD_Designer_2D_V1_3_10_Update.zip"
     }
   ]
 }

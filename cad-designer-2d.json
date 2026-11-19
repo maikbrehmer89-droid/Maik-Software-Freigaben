@@ -120,6 +120,23 @@
         "Große DXF/DWG-Zeichnungen: bis zu 32.768 Elemente bearbeiten. Bei Überschreitung Teilimport zur Bauteilauswahl."
       ],
       "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.11/CAD_Designer_2D_V1_3_11_Update.zip"
+    },
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.12",
+      "sha256": "331ef50f36f0b96a72168275344cbdeff344763bb658fe4fd940a017d71c3c16",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-19",
+      "aenderungen": [
+        "Konturcheck markiert auch 0,001 mm kleine Lücken zwischen Linien und Kreisbögen."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.12/CAD_Designer_2D_V1_3_12_Update.zip"
     }
   ]
 }

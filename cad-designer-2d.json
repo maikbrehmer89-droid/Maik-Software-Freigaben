@@ -137,6 +137,23 @@
         "Konturcheck markiert auch 0,001 mm kleine Lücken zwischen Linien und Kreisbögen."
       ],
       "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.12/CAD_Designer_2D_V1_3_12_Update.zip"
+    },
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.13",
+      "sha256": "50d55e9e2a99dced37aa95c0cee04677fd9c567856c544c4b5d86f5384c3b5d1",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-19",
+      "aenderungen": [
+        "Kontur schließen setzt Linienenden bei eindeutig zugeordneten Lücken bis 0,02 mm auf den passenden Endpunkt."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.13/CAD_Designer_2D_V1_3_13_Update.zip"
     }
   ]
 }

@@ -103,6 +103,23 @@
         "Doppellinien-Check erkennt zusätzlich doppelte Kreise und Bohrungen sowie überlagerte Kreisbögen."
       ],
       "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.10/CAD_Designer_2D_V1_3_10_Update.zip"
+    },
+    {
+      "app_id": "cad-designer-2d",
+      "plattformen": [
+        "windows-x64"
+      ],
+      "freigabe": "freigegeben",
+      "format": "zip",
+      "version": "1.3.11",
+      "sha256": "2400eef41bd633f24f6e37c8644cab579fa5a405986d97fb9793a06429f31c62",
+      "signatur_geprueft": false,
+      "installation_getestet": true,
+      "freigabedatum": "2026-11-19",
+      "aenderungen": [
+        "Große DXF/DWG-Zeichnungen: bis zu 32.768 Elemente bearbeiten. Bei Überschreitung Teilimport zur Bauteilauswahl."
+      ],
+      "download_url": "https://github.com/maikbrehmer89-droid/Maik-Software-Freigaben/releases/download/cad-designer-2d-v1.3.11/CAD_Designer_2D_V1_3_11_Update.zip"
     }
   ]
 }
